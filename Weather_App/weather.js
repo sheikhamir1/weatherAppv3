@@ -21,7 +21,7 @@ const ConverLongiAndLati = async () => {
 const fetchWeatherData = async () => {
   try {
     const response = await fetch(
-      "https://api.openweathermap.org/data/2.5/weather?q=kolkata&appid=6b556005dae9d19ffd7918ac69d92c9f",
+      "https://api.openweathermap.org/data/2.5/weather?lat=22.5414185&lon=88.35769124388872&appid=6b556005dae9d19ffd7918ac69d92c9f",
       {
         method: "GET",
       }
@@ -33,7 +33,7 @@ const fetchWeatherData = async () => {
   }
 };
 
-fetchWeatherData();
+// fetchWeatherData();
 
 // weather forecast data for upcoming days
 const forecastData = async () => {
@@ -51,5 +51,52 @@ const forecastData = async () => {
     console.error("Error fetching weather data:", error);
   }
 };
-
 // forecastData();
+
+// current date and time
+const CurrentDate = () => {
+  const date = new Date();
+  // console.log(`${date.toDateString()} | ${date.toTimeString()}`);
+  return `${date.toDateString()} | ${date.toTimeString()}`;
+};
+const CurrentTimeDate = CurrentDate();
+// console.log(CurrentTimeDate);
+
+// get location from user
+const getLocation = () => {
+  if (navigator.geolocation) {
+    // Use the geolocation API to get the current position
+    navigator.geolocation.getCurrentPosition(showPosition, showError);
+  } else {
+    console.log("Geolocation is not supported by this browser.");
+  }
+};
+// getLocation();
+
+// user current location (longitude and latitude)
+function showPosition(position) {
+  // Once location is obtained, you can access latitude and longitude
+  const latitude = position.coords.latitude;
+  const longitude = position.coords.longitude;
+
+  console.log("Latitude: " + latitude);
+  console.log("Longitude: " + longitude);
+}
+
+// Handle any errors that occur while getting the user location
+function showError(error) {
+  switch (error.code) {
+    case error.PERMISSION_DENIED:
+      console.log("User denied the request for Geolocation.");
+      break;
+    case error.POSITION_UNAVAILABLE:
+      console.log("Location information is unavailable.");
+      break;
+    case error.TIMEOUT:
+      console.log("The request to get user location timed out.");
+      break;
+    case error.UNKNOWN_ERROR:
+      console.log("An unknown error occurred.");
+      break;
+  }
+}
