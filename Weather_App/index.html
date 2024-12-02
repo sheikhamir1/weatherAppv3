@@ -3,13 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather App</title>
+    <title>Weather App v3</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <h1 class="text-center text-black font-semibold bg-lime-500">
-      weather app
-    </h1>
+  <body class="flex justify-center h-screen items-center text-white">
+    <div
+      class="container h-[448px] w-4/5 bg-[url('https://www.shutterstock.com/image-photo/beautiful-night-sky-stars-shining-600nw-2530957139.jpg')] bg-no-repeat bg-cover bg-center rounded-2xl"
+    >
+      <div class="border-2 border-white mt-8 p-1 grid grid-cols-3 h-28 m-8">
+        <div class="p-3 col-span-1 gap-2">
+          <h2 class="text-2xl font-bold">location name</h2>
+
+          <p class="text-xs">date and time</p>
+        </div>
+        <div class="border-l border-white p-3 col-span-2 flex justify-center">
+          <div>
+            <input type="search" />
+            <button>search</button>
+            <span>icon</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="weather.js"></script>
     <script src="tamjam.js"></script>
   </body>
