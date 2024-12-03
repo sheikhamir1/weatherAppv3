@@ -1,20 +1,28 @@
 "use strict";
+// all targeted elements
 
 // convert longi and lati to city name
 const ConverLongiAndLati = async () => {
+  const userInput = document.querySelector(".myCls2").value;
+  // console.log(userInput);
   try {
     const response = await fetch(
-      `http://api.openweathermap.org/geo/1.0/direct?q=kolkata&limit=5&appid=6b556005dae9d19ffd7918ac69d92c9f`,
+      `http://api.openweathermap.org/geo/1.0/direct?q=${userInput}&limit=5&appid=6b556005dae9d19ffd7918ac69d92c9f`,
       {
         method: "GET",
       }
     );
     const data = await response.json();
+
     console.log("convert longi and lati to city name", data);
+    const cityLogitude = data[0].lon;
+    const cityLatitude = data[0].lat;
+    console.log("city longitude", cityLogitude, "city latitude", cityLatitude);
   } catch (error) {
     console.error("Error fetching weather data:", error);
   }
 };
+
 // ConverLongiAndLati();
 
 // waether data fething
@@ -61,6 +69,10 @@ const CurrentDate = () => {
 };
 const CurrentTimeDate = CurrentDate();
 // console.log(CurrentTimeDate);
+
+const TimeDate = document.querySelector(".myCls");
+// console.log(TimeDate);
+const setTimeAndDate = (TimeDate.textContent = CurrentTimeDate);
 
 // get location from user
 const getLocation = () => {

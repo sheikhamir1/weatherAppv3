@@ -8,19 +8,28 @@
   </head>
   <body class="flex justify-center h-screen items-center text-white">
     <div
-      class="container h-[448px] w-4/5 bg-[url('https://www.shutterstock.com/image-photo/beautiful-night-sky-stars-shining-600nw-2530957139.jpg')] bg-no-repeat bg-cover bg-center rounded-2xl"
+      class="container h-[90%] w-4/5 bg-[url('https://www.shutterstock.com/image-photo/beautiful-night-sky-stars-shining-600nw-2530957139.jpg')] bg-no-repeat bg-cover bg-center rounded-2xl"
     >
-      <div class="border-2 border-white mt-8 p-1 grid grid-cols-3 h-28 m-8">
-        <div class="p-3 col-span-1 gap-2">
+      <div class="border-2 border-white mt-8 p-1 grid grid-cols-2 h-28 m-8">
+        <div class="p-3 gap-2">
           <h2 class="text-2xl font-bold">location name</h2>
 
-          <p class="text-xs">date and time</p>
+          <p class="text-xs myCls">date and time</p>
         </div>
-        <div class="border-l border-white p-3 col-span-2 flex justify-center">
-          <div>
-            <input type="search" />
-            <button>search</button>
-            <span>icon</span>
+        <div class="border-l border-white pt-4 p-3">
+          <div class="relative">
+            <input
+              type="text"
+              placeholder="Enter city name..."
+              class="myCls2 px-4 py-1 w-56 rounded-lg border-none focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#21252c] text-white placeholder:text-xs font-semibold"
+            />
+            <button
+              class="bg-white h-8 text-[14px] font-semibold text-gray-700 rounded-lg px-4 py-1 hover:bg-blue-800 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none absolute left-[210px]"
+              onclick="ConverLongiAndLati()"
+            >
+              search
+            </button>
+            <span class="absolute right-[60px] top-[4px]">icon</span>
           </div>
         </div>
       </div>
