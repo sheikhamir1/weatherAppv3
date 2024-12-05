@@ -4,6 +4,7 @@
 // convert longi and lati to city name
 const ConverLongiAndLati = async () => {
   const userInput = document.querySelector(".myCls2").value;
+  // document.querySelector(".myCls2").innerHTML = "";
   // console.log(userInput);
   try {
     const response = await fetch(
@@ -21,6 +22,17 @@ const ConverLongiAndLati = async () => {
   } catch (error) {
     console.error("Error fetching weather data:", error);
   }
+
+  const CurrentDate = () => {
+    const date = new Date();
+    // console.log(`${date.toDateString()} | ${date.toTimeString()}`);
+    return `${date.toDateString()} | ${date.toTimeString()}`;
+  };
+  const CurrentTimeDate = CurrentDate();
+  // console.log(CurrentTimeDate);
+
+  document.querySelector(".myCls").textContent = CurrentTimeDate;
+  // console.log(TimeDate);
 };
 
 // ConverLongiAndLati();
@@ -60,19 +72,6 @@ const forecastData = async () => {
   }
 };
 // forecastData();
-
-// current date and time
-const CurrentDate = () => {
-  const date = new Date();
-  // console.log(`${date.toDateString()} | ${date.toTimeString()}`);
-  return `${date.toDateString()} | ${date.toTimeString()}`;
-};
-const CurrentTimeDate = CurrentDate();
-// console.log(CurrentTimeDate);
-
-const TimeDate = document.querySelector(".myCls");
-// console.log(TimeDate);
-const setTimeAndDate = (TimeDate.textContent = CurrentTimeDate);
 
 // get location from user
 const getLocation = () => {
