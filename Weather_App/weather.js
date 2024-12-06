@@ -4,8 +4,10 @@
 // convert longi and lati to city name
 const ConverLongiAndLati = async () => {
   const userInput = document.querySelector(".myCls2").value;
-  // document.querySelector(".myCls2").innerHTML = "";
-  // console.log(userInput);
+  const city = document.querySelector(".myCls3");
+  const country = document.querySelector(".myCls4");
+  document.querySelector(".myCls2").value = "";
+  // console.log(city, country);
   try {
     const response = await fetch(
       `http://api.openweathermap.org/geo/1.0/direct?q=${userInput}&limit=5&appid=6b556005dae9d19ffd7918ac69d92c9f`,
@@ -18,7 +20,12 @@ const ConverLongiAndLati = async () => {
     console.log("convert longi and lati to city name", data);
     const cityLogitude = data[0].lon;
     const cityLatitude = data[0].lat;
-    console.log("city longitude", cityLogitude, "city latitude", cityLatitude);
+
+    city.textContent = data[0].name;
+    country.textContent = data[0].country;
+
+    fetchWeatherData(cityLogitude, cityLatitude);
+    // console.log("city longitude", cityLogitude, "city latitude", cityLatitude);
   } catch (error) {
     console.error("Error fetching weather data:", error);
   }
@@ -38,10 +45,10 @@ const ConverLongiAndLati = async () => {
 // ConverLongiAndLati();
 
 // waether data fething
-const fetchWeatherData = async () => {
+const fetchWeatherData = async (cityLogitude, cityLatitude) => {
   try {
     const response = await fetch(
-      "https://api.openweathermap.org/data/2.5/weather?lat=22.5414185&lon=88.35769124388872&appid=6b556005dae9d19ffd7918ac69d92c9f",
+      `https://api.openweathermap.org/data/2.5/weather?lat=${cityLatitude}&lon=${cityLogitude}&appid=6b556005dae9d19ffd7918ac69d92c9f`,
       {
         method: "GET",
       }
@@ -52,8 +59,6 @@ const fetchWeatherData = async () => {
     console.error("Error fetching weather data:", error);
   }
 };
-
-// fetchWeatherData();
 
 // weather forecast data for upcoming days
 const forecastData = async () => {
