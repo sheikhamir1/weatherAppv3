@@ -12,7 +12,7 @@
   </head>
   <body class="bg-[#3e405d] text-white h-[100vh] sm:py-12 sm:px-8 lg:px-24">
     <div
-      class="final bg-[url('https://www.shutterstock.com/image-photo/beautiful-night-sky-stars-shining-600nw-2530957139.jpg')] bg-no-repeat bg-cover bg-center h-[100%] sm:rounded-2xl"
+      class="final bg-[url('https://www.shutterstock.com/image-photo/beautiful-night-sky-stars-shining-600nw-2530957139.jpg')] bg-repeat-y sm:bg-no-repeat bg-cover bg-center sm:h-[100%] sm:rounded-2xl"
     >
       <div class="sectionOne sm:flex justify-center flex-row-reverse lg:mx-20">
         <div class="pt-8 sm:w-[50%]">
@@ -41,8 +41,26 @@
         <div class="pt-7 sm:w-[50%] px-3">
           <h2 class="myCls3 text-3xl font-bold ml-2 inline-block">N/A</h2>
           <span class="myCls4 text-xs">N/A</span>
-
           <p class="text-xs myCls mx-2">N/A</p>
+        </div>
+      </div>
+
+      <div class="sectionTwo grid grid-cols-1 gap-2 sm:grid-cols-2 mt-12">
+        <div class="min-h-[150px] grid grid-cols-2">
+          <div class="felx justify-self-center">
+            <p class="temp inline text-[85px]"></p>
+            <span>&deg;C</span>
+          </div>
+
+          <div class="felx justify-self-center">
+            <p class="feri inline text-[85px]"></p>
+            <span>&deg;F</span>
+          </div>
+
+          <div class="types col-span-3 text-center text-2xl">N/A</div>
+        </div>
+        <div class="min-h-[150px] border border-white">
+          <img id="test" src="" alt="" />
         </div>
       </div>
     </div>
@@ -50,6 +68,3 @@
     <script src="tamjam.js"></script>
   </body>
 </html>
-
-<!-- 
-bg-[url('https://www.shutterstock.com/image-photo/beautiful-night-sky-stars-shining-600nw-2530957139.jpg')] bg-no-repeat bg-cover bg-center rounded-2xl -->

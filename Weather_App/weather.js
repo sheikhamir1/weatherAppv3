@@ -1,5 +1,12 @@
 "use strict";
 // all targeted elements
+const temp = document.querySelector(".temp");
+const feri = document.querySelector(".feri");
+const cel = document.querySelector(".cel");
+const fer = document.querySelector(".fer");
+const img = document.querySelector("#test");
+
+const weatherTypes = document.querySelector(".types");
 
 // convert longi and lati to city name
 const ConverLongiAndLati = async () => {
@@ -7,7 +14,8 @@ const ConverLongiAndLati = async () => {
   const city = document.querySelector(".myCls3");
   const country = document.querySelector(".myCls4");
   document.querySelector(".myCls2").value = "";
-  // console.log(city, country);
+
+  // console.log(temp, cel, fer, types);
   try {
     const response = await fetch(
       `http://api.openweathermap.org/geo/1.0/direct?q=${userInput}&limit=5&appid=6b556005dae9d19ffd7918ac69d92c9f`,
@@ -55,10 +63,36 @@ const fetchWeatherData = async (cityLogitude, cityLatitude) => {
     );
     const data = await response.json();
     console.log("Weather data:", data);
+    console.log("icon:", data.weather[0].icon);
+
+    img.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+
+    // console.log("weather:", data.weather[0].main);
+    let type = data.weather[0].main;
+    weatherTypes.textContent = type;
+    let temperatureKelvin = data.main.temp;
+
+    // Convert Kelvin to Celsius and Fahrenheit
+    let temperatureCelsius = kelvinToCelsius(temperatureKelvin);
+    temp.innerHTML = temperatureCelsius;
+    let temperatureFahrenheit = kelvinToFahrenheit(temperatureKelvin);
+    feri.innerHTML = temperatureFahrenheit;
+    // console.log(
+    //   `Temperature: ${temperatureCelsius}°C and ${temperatureFahrenheit}°F`
+    // );
   } catch (error) {
     console.error("Error fetching weather data:", error);
   }
 };
+
+// Function to convert Kelvin to Celsius
+function kelvinToCelsius(kelvin) {
+  return (kelvin - 273.15).toFixed(0);
+}
+// Function to convert Kelvin to Fahrenheit
+function kelvinToFahrenheit(kelvin) {
+  return Math.round(((kelvin - 273.15) * 9) / 5 + 32);
+}
 
 // weather forecast data for upcoming days
 const forecastData = async () => {
