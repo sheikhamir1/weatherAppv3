@@ -5,6 +5,9 @@ const feri = document.querySelector(".feri");
 const cel = document.querySelector(".cel");
 const fer = document.querySelector(".fer");
 const img = document.querySelector("#test");
+const feel = document.querySelector(".feel");
+const humi = document.querySelector(".humi");
+const wind = document.querySelector(".wind");
 
 const weatherTypes = document.querySelector(".types");
 
@@ -63,7 +66,14 @@ const fetchWeatherData = async (cityLogitude, cityLatitude) => {
     );
     const data = await response.json();
     console.log("Weather data:", data);
-    console.log("icon:", data.weather[0].icon);
+    const feelsLike = data.main.feels_like;
+    const humidity = data.main.humidity;
+    const windSpeed = data.wind.speed;
+
+    // console.log(feelsLike, humidity, windSpeed);
+    feel.textContent = feelsLike;
+    humi.textContent = humidity;
+    wind.textContent = windSpeed;
 
     img.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
 
@@ -73,13 +83,16 @@ const fetchWeatherData = async (cityLogitude, cityLatitude) => {
     let temperatureKelvin = data.main.temp;
 
     // Convert Kelvin to Celsius and Fahrenheit
-    let temperatureCelsius = kelvinToCelsius(temperatureKelvin);
+    let temperatureCelsius = kelvinToCelsius(temperatureKelvin, feelsLike);
     temp.innerHTML = temperatureCelsius;
     let temperatureFahrenheit = kelvinToFahrenheit(temperatureKelvin);
     feri.innerHTML = temperatureFahrenheit;
     // console.log(
     //   `Temperature: ${temperatureCelsius}°C and ${temperatureFahrenheit}°F`
     // );
+
+    const feelsLikeCelsius = kelvinToCelsiusForFeels(feelsLike);
+    feel.innerHTML = feelsLikeCelsius;
   } catch (error) {
     console.error("Error fetching weather data:", error);
   }
@@ -89,11 +102,14 @@ const fetchWeatherData = async (cityLogitude, cityLatitude) => {
 function kelvinToCelsius(kelvin) {
   return (kelvin - 273.15).toFixed(0);
 }
+
 // Function to convert Kelvin to Fahrenheit
 function kelvinToFahrenheit(kelvin) {
   return Math.round(((kelvin - 273.15) * 9) / 5 + 32);
 }
-
+function kelvinToCelsiusForFeels(feelsLike) {
+  return (feelsLike - 273.15).toFixed(0);
+}
 // weather forecast data for upcoming days
 const forecastData = async () => {
   try {
