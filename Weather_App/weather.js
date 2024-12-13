@@ -10,15 +10,15 @@ const humi = document.querySelector(".humi");
 const wind = document.querySelector(".wind");
 
 const weatherTypes = document.querySelector(".types");
+// test
+const city = document.querySelector(".myCls3");
+const country = document.querySelector(".myCls4");
 
 // convert longi and lati to city name
 const ConverLongiAndLati = async () => {
   const userInput = document.querySelector(".myCls2").value;
-  const city = document.querySelector(".myCls3");
-  const country = document.querySelector(".myCls4");
   document.querySelector(".myCls2").value = "";
 
-  // console.log(temp, cel, fer, types);
   try {
     const response = await fetch(
       `http://api.openweathermap.org/geo/1.0/direct?q=${userInput}&limit=5&appid=6b556005dae9d19ffd7918ac69d92c9f`,
@@ -36,6 +36,7 @@ const ConverLongiAndLati = async () => {
     country.textContent = data[0].country;
 
     fetchWeatherData(cityLogitude, cityLatitude);
+    forecastData(cityLogitude, cityLatitude);
     // console.log("city longitude", cityLogitude, "city latitude", cityLatitude);
   } catch (error) {
     console.error("Error fetching weather data:", error);
@@ -111,10 +112,10 @@ function kelvinToCelsiusForFeels(feelsLike) {
   return (feelsLike - 273.15).toFixed(0);
 }
 // weather forecast data for upcoming days
-const forecastData = async () => {
+const forecastData = async (cityLogitude, cityLatitude) => {
   try {
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?lat=28.6517178&lon=77.2219388&cnt=7&appid=6b556005dae9d19ffd7918ac69d92c9f`,
+      `https://api.openweathermap.org/data/2.5/forecast?&lat=${cityLatitude}&lon=${cityLogitude}&cnt=7&appid=6b556005dae9d19ffd7918ac69d92c9f`,
 
       {
         method: "GET",
@@ -122,11 +123,36 @@ const forecastData = async () => {
     );
     const data = await response.json();
     console.log("Weather forecast data:", data);
+    // console.log(data.list[0].weather[0].main);
+    // console.log(data.list[0].weather[0].icon);
+    const listdata = document.querySelector(".listData");
+
+    data.list.forEach((item) => {
+      const forecastTemp = item.main.temp;
+      const forecastIcon = item.weather[0].icon;
+      const forecastType = item.weather[0].main;
+
+      const Temp = (forecastTemp - 273.15).toFixed(0);
+      // console.log(forecastTemp, forecastIcon, forecastType);
+      listdata.innerHTML += `
+      <div class="border border-white rounded-2xl sm:h-32 p-4">
+      
+      <div class="flex justify-center my-2">
+      <img class="w-24 h-24" src="http://openweathermap.org/img/wn/${forecastIcon}@2x.png" alt="" />
+      </div>
+
+      <p class="text-4xl font-semibold text-center text-gray-800"><span>Temp: </span>${Temp}<span>&deg;C</span></p>
+
+      <p class="text-xl text-center text-gray-600 font-medium"><span>Weather: </span>${forecastType}</p>
+      </div>
+    `;
+    });
+
+    // console.log(data.list[0].main.temp);
   } catch (error) {
     console.error("Error fetching weather data:", error);
   }
 };
-// forecastData();
 
 // get location from user
 const getLocation = () => {
