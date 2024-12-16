@@ -10,13 +10,17 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
   </head>
-  <body class="bg-[#3e405d] text-white sm:h-[100vh] sm:py-8 sm:px-8 lg:px-24">
+  <body
+    class="bg-[#3e405d] text-white sm:h-[100vh] sm:py-8 lg:py-3 sm:px-8 lg:px-24"
+  >
     <!-- main div background image -->
     <div
       class="final bg-[url('https://www.shutterstock.com/image-photo/beautiful-night-sky-stars-shining-600nw-2530957139.jpg')] bg-repeat-y sm:bg-no-repeat bg-cover bg-center min-h-full sm:h-[100%] sm:rounded-2xl h-[980px] lg:place-content-center"
     >
       <!-- section One start -->
-      <div class="sectionOne sm:flex justify-center flex-row-reverse lg:mx-20">
+      <div
+        class="sectionOne sm:flex justify-center flex-row-reverse lg:mx-20 lg:h-[95px] xl:mb-10"
+      >
         <!-- sub section one -->
         <div class="pt-8 sm:w-[50%]">
           <div class="flex justify-center sm:relative sm:block">
@@ -31,11 +35,12 @@
           </div>
           <div class="flex justify-center mt-2">
             <button
-              class="bg-white font-semibold text-gray-700 rounded-md hover:bg-blue-800 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none mx-2 py-1 px-2 sm:absolute sm:right-[90px] top-[63px] md:right-[135px] lg:right-[290px] lg:px-4 lg:top-[138px]"
+              class="bg-white font-semibold text-gray-700 rounded-md hover:bg-blue-800 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none mx-2 py-1 px-2 sm:absolute sm:right-[90px] top-[63px] md:right-[135px] lg:right-[286px] lg:top-[51px] lg:px-4 xl:right-[290px] xl:top-[134px]"
               onclick="ConverLongiAndLati()"
             >
               search
             </button>
+            <!-- lg:top-[138px] -->
             <i
               class="bi bi-crosshair2 text-[23px] sm:hidden cursor-pointer"
             ></i>
@@ -51,7 +56,7 @@
 
       <!-- section Two -->
       <div
-        class="sectionTwo grid grid-cols-1 gap-2 sm:grid-cols-2 mt-2 lg:mt-12 ml-[35px]"
+        class="sectionTwo grid grid-cols-1 gap-2 sm:grid-cols-2 mt-2 sm:mx-5 xl:my-10"
       >
         <!-- sub section one -->
         <div class="max-h-[150px] grid grid-cols-2">
@@ -70,7 +75,7 @@
 
         <!-- sub section two -->
         <div
-          class="max-h-[150px] grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-2"
+          class="max-h-[150px] grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-2 md:mr-5"
         >
           <!-- sub sub section one -->
           <div class="flex justify-center">
@@ -137,12 +142,13 @@
 
       <!-- section Three -->
       <div
-        class="sectionThree mt-28 sm:mt-5 p-5 sm:p-2 sm:min-h-[150px] bg-[#191c21a1] text-white w-[80%] mx-auto rounded-2xl"
+        class="sectionThree mt-28 sm:mt-5 p-5 sm:p-2 sm:min-h-[150px] bg-[#191c21a1] text-white w-[80%] mx-auto rounded-2xl lg:w-[99%]"
       >
         <!-- sub section one forcast div -->
         <div
-          class="listData grid grid-cols-1 gap-2 w-[65%] sm:w-[80%] h-[300px] sm:h-[155px] mx-auto overflow-y-auto sm:overflow-x-auto"
+          class="listData grid grid-cols-1 lg:w-[100%] lg:grid-cols-7 gap-2 w-[65%] sm:w-[80%] h-[300px] sm:h-[155px] mx-auto overflow-y-auto lg:h-[185px]"
         ></div>
+        <!-- overflow-y-auto lg:overflow-x-auto -->
       </div>
 
       <script src="weather.js"></script>

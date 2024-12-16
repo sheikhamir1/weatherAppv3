@@ -135,17 +135,14 @@ const forecastData = async (cityLogitude, cityLatitude) => {
       const Temp = (forecastTemp - 273.15).toFixed(0);
       // console.log(forecastTemp, forecastIcon, forecastType);
       listdata.innerHTML += `
-      <div class="border border-white rounded-2xl sm:h-32 p-4">
-      
-      <div class="flex justify-center my-2">
-      <img class="w-24 h-24" src="http://openweathermap.org/img/wn/${forecastIcon}@2x.png" alt="" />
-      </div>
-
-      <p class="text-4xl font-semibold text-center text-gray-800"><span>Temp: </span>${Temp}<span>&deg;C</span></p>
-
-      <p class="text-xl text-center text-gray-600 font-medium"><span>Weather: </span>${forecastType}</p>
-      </div>
-    `;
+        <div class="border border-white rounded-2xl sm:h-32 p-4 " style="border: 2px solid #fff;">
+        <div class="flex justify-center my-2">
+        <img class="w-24 h-24" src="http://openweathermap.org/img/wn/${forecastIcon}@2x.png" alt="" />
+        </div>
+        <p class="text-4xl font-semibold text-center text-gray-800"><span>Temp: </span>${Temp}<span>&deg;C</span></p>
+        <p class="text-xl text-center text-gray-600 font-medium"><span>Weather: </span>${forecastType}</p>
+        </div>
+      `;
     });
 
     // console.log(data.list[0].main.temp);
