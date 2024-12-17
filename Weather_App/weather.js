@@ -8,7 +8,9 @@ const img = document.querySelector("#test");
 const feel = document.querySelector(".feel");
 const humi = document.querySelector(".humi");
 const wind = document.querySelector(".wind");
-
+const sectionTwo = document.querySelector(".sectionTwo");
+const sectionThree = document.querySelector(".sectionThree");
+const test2 = document.querySelector(".test2");
 const weatherTypes = document.querySelector(".types");
 // test
 const city = document.querySelector(".myCls3");
@@ -38,6 +40,9 @@ const ConverLongiAndLati = async () => {
     fetchWeatherData(cityLogitude, cityLatitude);
     forecastData(cityLogitude, cityLatitude);
     // console.log("city longitude", cityLogitude, "city latitude", cityLatitude);
+    // sectionTwo.style.display = "block";
+    // sectionThree.style.display = "block";
+    test2.style.display = "block";
   } catch (error) {
     console.error("Error fetching weather data:", error);
   }
@@ -56,6 +61,61 @@ const ConverLongiAndLati = async () => {
 
 // ConverLongiAndLati();
 
+// user current location
+const getLocation = () => {
+  if (navigator.geolocation) {
+    // Use the geolocation API to get the current position
+    navigator.geolocation.getCurrentPosition(showPosition, showError);
+  } else {
+    console.log("Geolocation is not supported by this browser.");
+  }
+};
+// getLocation();
+
+// user current location (longitude and latitude)
+function showPosition(position) {
+  // Once location is obtained, you can access latitude and longitude
+  const latitudeUser = position.coords.latitude;
+  const longitudeUser = position.coords.longitude;
+
+  // console.log("Latitude: " + latitudeUser);
+  // console.log("Longitude: " + longitudeUser);
+
+  fetchWeatherData(longitudeUser, latitudeUser);
+  forecastData(longitudeUser, latitudeUser);
+  const CurrentDate = () => {
+    const date = new Date();
+    // console.log(`${date.toDateString()} | ${date.toTimeString()}`);
+    return `${date.toDateString()} | ${date.toTimeString()}`;
+  };
+  const CurrentTimeDate = CurrentDate();
+  // console.log(CurrentTimeDate);
+
+  document.querySelector(".myCls").textContent = CurrentTimeDate;
+  // console.log(TimeDate);
+  // sectionTwo.style.display = "block";
+  // sectionThree.style.display = "block";
+  test2.style.display = "block";
+}
+
+// Handle any errors that occur while getting the user location
+function showError(error) {
+  switch (error.code) {
+    case error.PERMISSION_DENIED:
+      console.log("User denied the request for Geolocation.");
+      break;
+    case error.POSITION_UNAVAILABLE:
+      console.log("Location information is unavailable.");
+      break;
+    case error.TIMEOUT:
+      console.log("The request to get user location timed out.");
+      break;
+    case error.UNKNOWN_ERROR:
+      console.log("An unknown error occurred.");
+      break;
+  }
+}
+
 // waether data fething
 const fetchWeatherData = async (cityLogitude, cityLatitude) => {
   try {
@@ -70,7 +130,11 @@ const fetchWeatherData = async (cityLogitude, cityLatitude) => {
     const feelsLike = data.main.feels_like;
     const humidity = data.main.humidity;
     const windSpeed = data.wind.speed;
+    const Lcity = data.name;
+    const Lcountry = data.sys.country;
 
+    city.textContent = Lcity;
+    country.textContent = Lcountry;
     // console.log(feelsLike, humidity, windSpeed);
     feel.textContent = feelsLike;
     humi.textContent = humidity;
@@ -126,6 +190,7 @@ const forecastData = async (cityLogitude, cityLatitude) => {
     // console.log(data.list[0].weather[0].main);
     // console.log(data.list[0].weather[0].icon);
     const listdata = document.querySelector(".listData");
+    listdata.innerHTML = "";
 
     data.list.forEach((item) => {
       const forecastTemp = item.main.temp;
@@ -135,13 +200,13 @@ const forecastData = async (cityLogitude, cityLatitude) => {
       const Temp = (forecastTemp - 273.15).toFixed(0);
       // console.log(forecastTemp, forecastIcon, forecastType);
       listdata.innerHTML += `
-        <div class="border border-white rounded-2xl sm:h-32 p-4 " style="border: 2px solid #fff;">
-        <div class="flex justify-center my-2">
-        <img class="w-24 h-24" src="http://openweathermap.org/img/wn/${forecastIcon}@2x.png" alt="" />
-        </div>
-        <p class="text-4xl font-semibold text-center text-gray-800"><span>Temp: </span>${Temp}<span>&deg;C</span></p>
-        <p class="text-xl text-center text-gray-600 font-medium"><span>Weather: </span>${forecastType}</p>
-        </div>
+      <div class="border border-white rounded-2xl sm:h-32 p-4 " style="border: 2px solid #fff;">
+      <div class="flex justify-center my-2">
+      <img class="w-24 h-24" src="http://openweathermap.org/img/wn/${forecastIcon}@2x.png" alt="" />
+      </div>
+      <p class="text-4xl font-semibold text-center text-gray-800"><span>Temp: </span>${Temp}<span>&deg;C</span></p>
+      <p class="text-xl text-center text-gray-600 font-medium"><span>Weather: </span>${forecastType}</p>
+      </div>
       `;
     });
 
@@ -150,42 +215,3 @@ const forecastData = async (cityLogitude, cityLatitude) => {
     console.error("Error fetching weather data:", error);
   }
 };
-
-// get location from user
-const getLocation = () => {
-  if (navigator.geolocation) {
-    // Use the geolocation API to get the current position
-    navigator.geolocation.getCurrentPosition(showPosition, showError);
-  } else {
-    console.log("Geolocation is not supported by this browser.");
-  }
-};
-// getLocation();
-
-// user current location (longitude and latitude)
-function showPosition(position) {
-  // Once location is obtained, you can access latitude and longitude
-  const latitude = position.coords.latitude;
-  const longitude = position.coords.longitude;
-
-  console.log("Latitude: " + latitude);
-  console.log("Longitude: " + longitude);
-}
-
-// Handle any errors that occur while getting the user location
-function showError(error) {
-  switch (error.code) {
-    case error.PERMISSION_DENIED:
-      console.log("User denied the request for Geolocation.");
-      break;
-    case error.POSITION_UNAVAILABLE:
-      console.log("Location information is unavailable.");
-      break;
-    case error.TIMEOUT:
-      console.log("The request to get user location timed out.");
-      break;
-    case error.UNKNOWN_ERROR:
-      console.log("An unknown error occurred.");
-      break;
-  }
-}
