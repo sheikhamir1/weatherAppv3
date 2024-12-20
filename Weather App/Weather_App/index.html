@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App v3</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+  </head>
+  <body
+    class="bg-[#3e405d] text-white sm:h-[100vh] sm:py-8 lg:py-3 sm:px-8 lg:px-24"
+  >
+    <!-- main div background image -->
+    <div
+      class="final bg-[url('https://www.shutterstock.com/image-photo/beautiful-night-sky-stars-shining-600nw-2530957139.jpg')] bg-repeat-y sm:bg-no-repeat bg-cover bg-center min-h-full sm:h-[100%] sm:rounded-2xl h-[980px]"
+    >
+      <!-- section One start -->
+      <!-- lg:place-content-center -->
+      <div
+        class="sectionOne sm:flex justify-center flex-row-reverse lg:mx-20 lg:h-[95px] xl:mb-10"
+      >
+        <!-- sub section one -->
+        <div class="pt-8 sm:w-[50%]">
+          <div class="flex justify-center sm:relative sm:block">
+            <input
+              type="text"
+              placeholder="Enter city name..."
+              class="myCls2 rounded-md w-[90%] sm:w-[65%] px-2 py-1 border-none focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#21252c] text-white placeholder:text-xs"
+            />
+            <i
+              class="bi bi-crosshair2 hidden sm:block sm:absolute sm:right-[30px] top-0 text-[23px] md:right-[70px] cursor-pointer lg:right-[85px]"
+              onclick="getLocation()"
+            ></i>
+          </div>
+          <div class="flex justify-center mt-2">
+            <button
+              class="bg-white font-semibold text-gray-700 rounded-md hover:bg-blue-800 hover:text-white focus:ring-2 focus:ring-blue-400 focus:outline-none mx-2 py-1 px-2 sm:absolute sm:right-[90px] top-[63px] md:right-[135px] lg:right-[286px] lg:top-[44px] lg:px-4"
+              onclick="ConverLongiAndLati()"
+            >
+              search
+            </button>
+            <!-- xl:top-[134px] xl:right-[290px]
+             
+            window.screen.height
+            768
+            window.screen.width
+            1366
+            
+            -->
+            <i
+              class="bi bi-crosshair2 text-[23px] sm:hidden cursor-pointer"
+              onclick="getLocation()"
+            ></i>
+          </div>
+        </div>
+        <!-- sub section two -->
+        <div class="hideTime pt-7 sm:w-[50%] px-3">
+          <h2 class="myCls3 text-3xl font-bold ml-2 inline-block">N/A</h2>
+          <span class="myCls4 text-xs">N/A</span>
+          <p class="text-xs myCls mx-2">N/A</p>
+        </div>
+      </div>
+
+      <div class="test2 hidden">
+        <!-- section Two -->
+        <div
+          class="sectionTwo grid grid-cols-1 gap-2 sm:grid-cols-2 mt-2 sm:mx-5 xl:my-10"
+        >
+          <!-- sub section one -->
+          <div class="max-h-[150px] grid grid-cols-2">
+            <div class="felx justify-self-center">
+              <p class="temp inline text-[85px]"></p>
+              <span>&deg;C</span>
+            </div>
+
+            <div class="felx justify-self-center">
+              <p class="feri inline text-[85px]"></p>
+              <span>&deg;F</span>
+            </div>
+
+            <div class="types col-span-3 text-center text-2xl">N/A</div>
+          </div>
+
+          <!-- sub section two -->
+          <div
+            class="max-h-[150px] grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-2 md:mr-5"
+          >
+            <!-- sub sub section one -->
+            <div class="flex justify-center">
+              <img class="aaaa" id="test" alt="weather description" />
+            </div>
+
+            <!-- sub sub section two -->
+            <div
+              class="w-[75%] sm:w-[100%] grid place-self-center mb-10 col-span-2 lg:col-span-1"
+            >
+              <div class="flex justify-between items-baseline">
+                <img
+                  class="bg-white w-[40px] h-[40px] rounded-lg"
+                  src="/Weather_App//icons//temperature-feels-like.989x1024.png"
+                  alt=""
+                />
+                <div>
+                  <p
+                    class="inline text-xl sm:text-md md:text-sm xl:text-2xl font-bold"
+                  >
+                    Feels like
+                  </p>
+                  <p class="feel inline font-bold">N/A</p>
+                  <span class="text-xs">&deg;C</span>
+                </div>
+              </div>
+
+              <div class="flex justify-between items-baseline">
+                <img
+                  class="bg-white w-[40px] h-[40px] rounded-lg"
+                  src="/Weather_App//icons//humidity.738x1024.png"
+                  alt=""
+                />
+                <div>
+                  <p
+                    class="inline text-xl sm:text-md md:text-sm xl:text-2xl font-bold"
+                  >
+                    Humidity
+                  </p>
+                  <p class="humi inline font-bold">N/A</p>
+                  <span class="text-xs">%</span>
+                </div>
+              </div>
+
+              <div class="flex justify-between items-baseline">
+                <img
+                  class="bg-white w-[40px] h-[40px] rounded-lg"
+                  src="/Weather_App//icons//wind.1024x945.png"
+                  alt=""
+                />
+                <div>
+                  <p
+                    class="inline text-xl sm:text-md md:text-sm xl:text-2xl font-bold"
+                  >
+                    Wind speed
+                  </p>
+                  <p class="wind inline font-bold">N/A</p>
+                  <span class="text-xs">Km/h</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- section Three -->
+        <div
+          class="sectionThree mt-28 sm:mt-5 p-5 sm:p-2 sm:min-h-[150px] bg-[#191c21a1] text-white w-[80%] mx-auto rounded-2xl lg:w-[99%]"
+        >
+          <!-- sub section one forcast div -->
+          <div
+            class="listData grid grid-cols-1 lg:w-[100%] lg:grid-cols-7 gap-2 w-[65%] sm:w-[80%] h-[300px] sm:h-[155px] mx-auto overflow-y-auto lg:h-[185px]"
+          ></div>
+          <!-- overflow-y-auto lg:overflow-x-auto -->
+        </div>
+      </div>
+      <script src="weather.js"></script>
+      <script src="tamjam.js"></script>
+    </div>
+  </body>
+</html>
